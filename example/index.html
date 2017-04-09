@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../dist/overlay-popup.min.css">
+</head>
+<body style="padding: 30px 0;">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="container">
+    <button class="btn btn-primary btn-lg show-popup">Show popup</button>
+    <div id="overlay-popup">
+        <div class="container">
+            <p>
+                <img src="http://www.pics4world.com/vb/lyncache/2/6068showing.jpg"/>
+            </p>
+            <p>
+                Vivamus suscipit tortor eget felis porttitor volutpat. Pellentesque in ipsum id orci porta dapibus. Cras
+                ultricies ligula sed magna dictum porta. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
+                dui. Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut
+                libero malesuada feugiat. Cras ultricies ligula sed magna dictum porta. Curabitur aliquet quam id dui
+                posuere blandit. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
+            </p>
+            <p>
+                Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Proin eget
+                tortor risus. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit
+                tortor eget felis porttitor volutpat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+                Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus magna justo, lacinia eget consectetur
+                sed, convallis at tellus.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+<script src="../dist/overlay-popup.min.js"></script>
+<script>
+  jQuery(function ($) {
+    $(document).ready(function () {
+        /* init overlay */
+      $('#overlay-popup').overlayPopup({
+        afterInit: function (overlay) {
+          $('.show-popup').on('click', function() {
+            //display popup when page loaded
+            var overlayId = overlay.attr('id');
+            $(document).trigger(overlayId + ":show");
+          });
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
