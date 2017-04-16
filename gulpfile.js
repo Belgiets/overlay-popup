@@ -11,6 +11,7 @@ var gulp = require('gulp'),
   notify = require('gulp-notify'),
   cache = require('gulp-cache'),
   livereload = require('gulp-livereload'),
+  babel = require('gulp-babel'),
   lr = require('tiny-lr'),
   server = lr(),
   gutil = require('gulp-util'),
@@ -44,10 +45,11 @@ gulp.task('styles', function () {
 // Scripts
 gulp.task('scripts', function () {
   return gulp.src(gSrc.js)
+    .pipe(babel({presets: ['es2015']}))
     .pipe(concat('overlay-popup.js'))
     .pipe(gulp.dest(gDst))
     .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(livereload(server))
     .pipe(gulp.dest(gDst))
     .pipe((env === 'dev') ? notify({message: 'Scripts task complete'}) : gutil.noop());
