@@ -54,13 +54,7 @@
 
       /* init overlay */
       popup.overlayPopup({
-        afterInit: function (overlay) {
-          $('.show-popup').on('click', function() {
-            //display popup when page loaded
-            var overlayId = overlay.attr('data-op-id');
-            $(document).trigger(overlayId + ":show");
-          });
-        }
+//        callBtn: $('.show-popup')
       });
 
       /* destroy overlay */
