@@ -43,11 +43,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'initPopup',
       value: function initPopup() {
         var popup = this,
-            overlay = this.overlay;
+            overlay = this.overlay,
+            srcHtml = overlay.html();
 
         /* create html */
         overlay.addClass(this.initClass).attr(this.dataAttr, this.id);
-        overlay.html('<div class="' + this.wrClass + '"><div class="' + this.contentClass + ' ' + 'op-' + this.options.position + '">' + overlay.html() + '</div>');
+        overlay.html('<div class="' + this.wrClass + '"><div class="' + this.contentClass + ' ' + 'op-' + this.options.position + '">' + srcHtml + '</div>');
 
         /* apply style options */
         $('.' + this.initClass).css({ backgroundColor: this.options.overlayColor });
@@ -91,8 +92,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.btnObj.bind(this.closeClick, function () {
             $(document).trigger(popup.eventHide);
           });
-
-          // console.log(this.btnObj instanceof jQuery);
         }
 
         /* save data */
@@ -112,13 +111,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.btnObj.unbind(this.closeClick);
 
         /* revert html */
+        this.btnObj.remove();
         this.overlay.removeClass(this.initClass).removeAttr(this.dataAttr + ' style');
         this.overlay.html($('.' + this.contentClass, this.overlay).html());
-
-        // console.log(this.btnObj);
-        this.overlay.remove(this.btnObj);
-        // this.btnObj.remove();
-        // if ('default' === this.options.closeBtn) this.btnObj.remove();
 
         /* remove data */
         this.overlay.removeData(dataKey);
