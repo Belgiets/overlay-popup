@@ -6,8 +6,13 @@
       this.options = $.extend({
         beforeShow: function() {},
         beforeHide: function() {},
+        afterInit: function() {},
         closeBtn: 'default',
-        afterInit: function() {}
+        position: 'center',
+        overlayColor: 'rgba(0,0,0,.7)',
+        popupColor: '#ffffff',
+        width: '80%',
+        height: '80%'
       }, options);
 
       this.overlay = jqueryObject;
@@ -18,6 +23,7 @@
       this.closeClick = 'click.overlay-popup';
 
       this.initClass = 'op-init';
+      this.wrClass = 'op-wr';
       this.contentClass = 'op-content';
       this.switchClass = 'op-display';
       this.dataAttr = 'data-op-id';
@@ -38,7 +44,16 @@
 
       /* create html */
       overlay.addClass(this.initClass).attr(this.dataAttr, this.id);
-      overlay.html('<div class="' + this.contentClass + '">' + overlay.html() + '</div>');
+      overlay.html('<div class="' + this.wrClass + '"><div class="' + this.contentClass + ' ' +
+        'op-' + this.options.position + '">' + overlay.html() + '</div>');
+
+      /* apply style options */
+      $('.' + this.initClass).css({backgroundColor: this.options.overlayColor});
+      $('.' + this.contentClass).css({
+        backgroundColor: this.options.popupColor,
+        width: this.options.width,
+        height: this.options.height
+      });
 
       /* bind events */
       $(document).on(this.eventShow, function () {
@@ -74,6 +89,8 @@
         this.btnObj.bind(this.closeClick, function () {
           $(document).trigger(popup.eventHide);
         });
+
+        // console.log(this.btnObj instanceof jQuery);
       }
 
       /* save data */
@@ -86,14 +103,19 @@
     }
 
     destroyPopup() {
-      /* revert html */
-      this.overlay.removeClass(this.initClass).removeAttr(this.dataAttr);
-      this.overlay.replaceWith(this.overlay.html());
-
       /* unbind events */
       $(document).unbind(this.eventShow);
       $(document).unbind(this.eventHide);
       this.btnObj.unbind(this.closeClick);
+
+      /* revert html */
+      this.overlay.removeClass(this.initClass).removeAttr(this.dataAttr + ' style');
+      this.overlay.html($('.' + this.contentClass, this.overlay).html());
+
+      // console.log(this.btnObj);
+      this.overlay.remove(this.btnObj);
+      // this.btnObj.remove();
+      // if ('default' === this.options.closeBtn) this.btnObj.remove();
 
       /* remove data */
       this.overlay.removeData(dataKey);
