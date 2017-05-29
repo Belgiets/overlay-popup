@@ -113,7 +113,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }, {
       key: 'destroyPopup',
-      value: function destroyPopup() {
+      value: function destroyPopup(options) {
+        var destrOptions = $.extend({
+          beforeDestroy: function beforeDestroy() {},
+          afterDestroy: function afterDestroy() {}
+        }, options);
+
+        /* before destroy callback */
+        if (destrOptions.beforeDestroy && typeof destrOptions.beforeDestroy === "function") {
+          destrOptions.beforeDestroy(this.overlay);
+        }
+
         /* unbind events */
         $(document).unbind(this.eventShow);
         $(document).unbind(this.eventHide);
@@ -126,6 +136,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* remove data */
         this.overlay.removeData(dataKey);
+
+        /* after destroy callback */
+        if (destrOptions.afterDestroy && typeof destrOptions.afterDestroy === "function") {
+          destrOptions.afterDestroy();
+        }
       }
     }], [{
       key: 'generateId',
@@ -151,11 +166,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     },
 
-    destroy: function destroy() {
+    destroy: function destroy(options) {
       return this.each(function () {
         var popup = $(this).data(dataKey);
 
-        popup.destroyPopup();
+        popup.destroyPopup(options);
       });
     }
   };

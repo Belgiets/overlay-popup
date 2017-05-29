@@ -18,8 +18,9 @@
 
 <!-- Add your site or application content here -->
 <div class="container">
-    <button class="btn btn-primary btn-lg show-popup">Show popup</button>
-    <button class="btn btn-primary btn-lg destroy-popup">Destroy popup</button>
+    <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 30px;">
+        <button class="btn btn-primary init-popup">Init popup</button>
+    </div>
     <div id="overlay-popup">
         <div class="some-container">
             <p>
@@ -52,14 +53,23 @@
     $(document).ready(function () {
       var popup = $('#overlay-popup');
 
-      /* init overlay */
-      popup.overlayPopup({
-//        callBtn: $('.show-popup')
-      });
+      $('.init-popup').on('click', function() {
+          $(this).after('<button class="btn btn-success show-popup">Show popup</button><button class="btn ' +
+              'btn-danger destroy-popup">Destroy popup</button>');
 
-      /* destroy overlay */
-      $('.destroy-popup').on('click', function() {
-        popup.overlayPopup('destroy');
+          /* init overlay */
+          popup.overlayPopup({
+              callBtn: $('.show-popup')
+          });
+
+          /* destroy overlay */
+          $('.destroy-popup').on('click', function() {
+              popup.overlayPopup('destroy', {
+                  afterDestroy: function() {
+                      $('.btn-success.show-popup, .btn-danger.destroy-popup').remove();
+                  }
+              });
+          });
       });
     });
   });

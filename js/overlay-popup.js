@@ -110,7 +110,17 @@
       }
     }
 
-    destroyPopup() {
+    destroyPopup(options) {
+      let destrOptions = $.extend({
+          beforeDestroy: function() {},
+          afterDestroy: function() {},
+      }, options);
+
+      /* before destroy callback */
+      if (destrOptions.beforeDestroy && typeof destrOptions.beforeDestroy === "function") {
+          destrOptions.beforeDestroy(this.overlay);
+      }
+
       /* unbind events */
       $(document).unbind(this.eventShow);
       $(document).unbind(this.eventHide);
@@ -123,6 +133,11 @@
 
       /* remove data */
       this.overlay.removeData(dataKey);
+
+      /* after destroy callback */
+      if (destrOptions.afterDestroy && typeof destrOptions.afterDestroy === "function") {
+          destrOptions.afterDestroy();
+      }
     }
   }
 
@@ -135,11 +150,11 @@
       });
     },
 
-    destroy: function() {
+    destroy: function(options) {
       return this.each(function() {
         let popup = $(this).data(dataKey);
 
-        popup.destroyPopup();
+        popup.destroyPopup(options);
       });
     }
   };
