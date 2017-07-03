@@ -15,7 +15,7 @@ var gulp = require('gulp'),
   lr = require('tiny-lr'),
   server = lr(),
   gutil = require('gulp-util'),
-  env = gutil.env.env || 'dev';
+  env = gutil.env.env || 'dev'
 
 var gSrc = {
   scss: [
@@ -24,9 +24,9 @@ var gSrc = {
   js: [
     'js/*.js'
   ]
-};
+}
 
-var gDst = 'dist';
+var gDst = 'dist'
 
 // Styles
 gulp.task('styles', function () {
@@ -39,8 +39,8 @@ gulp.task('styles', function () {
     .pipe(gulpif('*.css', minifycss()))
     .pipe(livereload(server))
     .pipe(gulp.dest(gDst))
-    .pipe((env === 'dev') ? notify({message: 'Styles task complete'}) : gutil.noop());
-});
+    .pipe((env === 'dev') ? notify({message: 'Styles task complete'}) : gutil.noop())
+})
 
 // Scripts
 gulp.task('scripts', function () {
@@ -52,23 +52,22 @@ gulp.task('scripts', function () {
     // .pipe(uglify())
     .pipe(livereload(server))
     .pipe(gulp.dest(gDst))
-    .pipe((env === 'dev') ? notify({message: 'Scripts task complete'}) : gutil.noop());
-});
+    .pipe((env === 'dev') ? notify({message: 'Scripts task complete'}) : gutil.noop())
+})
 
 // Clean
 gulp.task('clean', function () {
   return gulp.src([gDst], {read: false})
-    .pipe(clean());
-});
+    .pipe(clean())
+})
 
 // Default task
 gulp.task('default', ['clean'], function () {
-  gulp.run('styles', 'scripts');
-});
+  gulp.run('styles', 'scripts')
+})
 
 // Watch
 gulp.task('watch', function () {
-
   // Listen on port 35729
   server.listen(35729, function (err) {
     if (err) {
@@ -78,14 +77,14 @@ gulp.task('watch', function () {
 
     // Watch .scss files
     gulp.watch(gSrc.scss, function (event) {
-      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-      gulp.run('styles');
-    });
+      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...')
+      gulp.run('styles')
+    })
 
     // Watch .js files
     gulp.watch(gSrc.js, function (event) {
-      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-      gulp.run('scripts');
-    });
-  });
-});
+      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...')
+      gulp.run('scripts')
+    })
+  })
+})

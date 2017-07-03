@@ -41,9 +41,11 @@
         width: 2px;
         background-color: #000000; }
       .op-init .op-content .op-close-in:before {
-        transform: rotate(45deg); }
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg); }
       .op-init .op-content .op-close-in:after {
-        transform: rotate(-45deg); }
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg); }
     .op-init .op-content.op-center {
       top: 0;
       left: 0;

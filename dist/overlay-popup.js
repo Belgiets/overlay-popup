@@ -29,8 +29,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.overlay = jqueryObject;
       this.id = Popup.generateId();
 
-      this.eventShow = this.id + ":show";
-      this.eventHide = this.id + ":hide";
+      this.eventShow = this.id + ':show';
+      this.eventHide = this.id + ':hide';
       this.closeClick = 'click.overlay-popup';
 
       this.initClass = 'op-init';
@@ -63,22 +63,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           /* bind events */
           $(document).on(this.eventShow, function () {
             /* before show callback */
-            if (popup.options.beforeShow && typeof popup.options.beforeShow === "function") {
+            if (popup.options.beforeShow && typeof popup.options.beforeShow === 'function') {
               popup.options.beforeShow();
             }
 
             overlay.addClass(popup.switchClass);
-            $("body").css("overflow", "hidden");
+            $('body').css('overflow', 'hidden');
           });
 
           $(document).on(this.eventHide, function () {
             /* before hide callback */
-            if (popup.options.beforeHide && typeof popup.options.beforeHide === "function") {
+            if (popup.options.beforeHide && typeof popup.options.beforeHide === 'function') {
               popup.options.beforeHide();
             }
 
             overlay.removeClass(popup.switchClass);
-            $("body").css("overflow", "visible");
+            $('body').css('overflow', 'visible');
           });
 
           popup.options.callBtn.on('click', function () {
@@ -89,7 +89,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.options.closeBtn) {
             this.btnObj = $('<div class="op-close"><div class="op-close-in"></div></div>');
 
-            if ('default' === this.options.closeBtn) {
+            if (this.options.closeBtn === 'default') {
               $('.op-content', overlay).prepend(this.btnObj);
             } else {
               this.btnObj = $(this.options.closeBtn);
@@ -104,7 +104,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.overlay.data(dataKey, this);
 
           /* after init callback */
-          if (popup.options.afterInit && typeof popup.options.afterInit === "function") {
+          if (popup.options.afterInit && typeof popup.options.afterInit === 'function') {
             popup.options.afterInit(overlay);
           }
         } catch (e) {
@@ -120,7 +120,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, options);
 
         /* before destroy callback */
-        if (destrOptions.beforeDestroy && typeof destrOptions.beforeDestroy === "function") {
+        if (destrOptions.beforeDestroy && typeof destrOptions.beforeDestroy === 'function') {
           destrOptions.beforeDestroy(this.overlay);
         }
 
@@ -138,14 +138,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.overlay.removeData(dataKey);
 
         /* after destroy callback */
-        if (destrOptions.afterDestroy && typeof destrOptions.afterDestroy === "function") {
+        if (destrOptions.afterDestroy && typeof destrOptions.afterDestroy === 'function') {
           destrOptions.afterDestroy();
         }
       }
     }], [{
       key: 'generateId',
       value: function generateId() {
-        var s = "";
+        var s = '';
         while (s.length < 10 && 10 > 0) {
           var r = Math.random();
           s += r < 0.1 ? Math.floor(r * 100) : String.fromCharCode(Math.floor(r * 26) + (r > 0.5 ? 97 : 65));
