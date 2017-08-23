@@ -51,8 +51,8 @@
           'op-' + this.options.position + '">' + srcHtml + '</div>')
 
         /* apply style options */
-        $('.' + this.initClass).css({backgroundColor: this.options.overlayColor})
-        $('.' + this.contentClass).css({
+        $('.' + this.initClass, overlay).css({backgroundColor: this.options.overlayColor})
+        $('.' + this.contentClass, overlay).css({
           backgroundColor: this.options.popupColor,
           width: this.options.width,
           height: this.options.height
