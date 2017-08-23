@@ -53,7 +53,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           overlay.html('<div class="' + this.wrClass + '"><div class="' + this.contentClass + ' ' + 'op-' + this.options.position + '">' + srcHtml + '</div>');
 
           /* apply style options */
-          $('.' + this.initClass, overlay).css({ backgroundColor: this.options.overlayColor });
+          overlay.css({ backgroundColor: this.options.overlayColor });
           $('.' + this.contentClass, overlay).css({
             backgroundColor: this.options.popupColor,
             width: this.options.width,
@@ -131,7 +131,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* revert html */
         this.btnObj.remove();
-        this.overlay.removeClass(this.initClass).removeAttr(this.dataAttr + ' style');
+        this.overlay.removeClass(this.overlay).removeAttr(this.dataAttr + ' style');
         this.overlay.html($('.' + this.contentClass, this.overlay).html());
 
         /* remove data */
